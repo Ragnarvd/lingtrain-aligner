@@ -624,6 +624,96 @@ def sort_meta(metas):
         for mark in metas["items"][lang]:
             metas["items"][lang][mark].sort(key=lambda x: x[2])
 
+def create_book_1(paragraphs_from, paragraphs_to, meta, output_path, template, styles=[]):
+    """Generate html"""
+    # ensure path is existed
+    pathlib.Path(output_path).parent.mkdir(parents=True, exist_ok=True)
+
+    if template in STYLES:
+        css = generate_css(STYLES[template])
+        sent_cycle = len(STYLES[template])
+    elif template == "custom" and styles:
+        css = generate_css(styles)
+        sent_cycle = len(styles)
+    else:
+        css = generate_css([])
+        sent_cycle = 2
+
+    with open(output_path, "w", encoding="utf8") as res_html:
+        # --------------------HEAD
+        res_html.write(f"""
+        <html><head>
+            <link rel="stylesheet" href="main.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+            <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400&display=swap" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+            <title>Lingtrain Magic Book</title>
+            {css}
+        </head>
+        <body>""")
+
+        # --------------------BOOK
+        res_html.write("<div class='dt cont'>")
+
+        #--------------------TITLE and AUTHOR
+        res_html.write("<div class='dt-row header'><div class='par dt-cell'>")
+
+        title_from = get_meta_from(meta, preprocessor.TITLE)
+        if title_from:
+            res_html.write("<h1>" + title_from[0] + "</h1>")
+        author_from = get_meta_from(meta, preprocessor.AUTHOR)
+        if author_from:
+            res_html.write("<h2>" + author_from[0] + "</h2>")
+
+        res_html.write("</div><div class='par dt-cell'>")
+
+        title_to = get_meta_to(meta, preprocessor.TITLE)
+        if title_to:
+            res_html.write("<h1>" + title_to[0] + "</h1>")
+        author_to = get_meta_to(meta, preprocessor.AUTHOR)
+        if author_to:
+            res_html.write("<h2>" + author_to[0] + "</h2>")
+
+        res_html.write("</div></div>")
+
+        # --------------------DIVIDER
+        res_html.write("<div class='dt-row header'>")
+        res_html.write(
+            "<div class='dt-cell divider'><img class='divider-img' src='https://habrastorage.org/webt/nr/av/qa/nravqa-wy0sg8kgwr3cfli8veym.png'/></div><div class='dt-cell divider'><img class='divider-img' src='https://habrastorage.org/webt/nr/av/qa/nravqa-wy0sg8kgwr3cfli8veym.png'/></div>")
+        res_html.write("</div>")
+
+        # --------------------FIRST HEADERS IF EXIST
+        write_header(res_html, meta, preprocessor.H1, occurence=0)
+        write_header(res_html, meta, preprocessor.H2, occurence=0)
+        write_header(res_html, meta, preprocessor.H3, occurence=0)
+        write_header(res_html, meta, preprocessor.H4, occurence=0)
+        write_header(res_html, meta, preprocessor.H5, occurence=0)
+
+        # --------------------PARAGRAPHS
+        for p_from, p_to in zip(paragraphs_from, paragraphs_to):
+
+            if p_from == H1_MARK: write_header(res_html, meta, preprocessor.H1, occurence=p_to, add_divider=True)
+            elif p_from == H2_MARK: write_header(res_html, meta, preprocessor.H2, occurence=p_to, add_divider=True)
+            elif p_from == H3_MARK: write_header(res_html, meta, preprocessor.H3, occurence=p_to, add_divider=True)
+            elif p_from == H4_MARK: write_header(res_html, meta, preprocessor.H4, occurence=p_to, add_divider=True)
+            elif p_from == H5_MARK: write_header(res_html, meta, preprocessor.H5, occurence=p_to, add_divider=True)
+
+            elif p_from == DIVIDER_MARK:
+                res_html.write("<div class='dt-row header'>")
+                res_html.write(
+                    "<div class='dt-cell divider'><img class='divider-img' src='https://habrastorage.org/webt/nr/av/qa/nravqa-wy0sg8kgwr3cfli8veym.png'/></div><div class='dt-cell divider'><img class='divider-img' src='https://habrastorage.org/webt/nr/av/qa/nravqa-wy0sg8kgwr3cfli8veym.png'/></div>")
+                res_html.write("</div>")
+            else:
+                res_html.write("<div class='dt-row'><div class='par dt-cell'>")
+                for i, sent in enumerate(p_from):
+                    res_html.write(f"<span class='sent sent-{i%sent_cycle}'>{sent}</span>")
+                res_html.write("</div><div class='par dt-cell'>")
+                for i, sent in enumerate(p_to):
+                    res_html.write(f"<span class='sent sent-{i%sent_cycle}'>{sent}</span>")
+                res_html.write("</div></div>")
+
+        res_html.write("</div>")
+        res_html.write("</body></html>")            
 
 def create_book(
     lang_ordered,
