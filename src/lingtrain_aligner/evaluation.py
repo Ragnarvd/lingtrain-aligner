@@ -126,18 +126,4 @@ def read_alignments(file):
                 raise Exception('Failed to parse line "%s"' % line.strip())
             alignments.append((src, tgt))
     return alignments
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
-bertalign/eval.py at main · bfsujason/bertalign
+
