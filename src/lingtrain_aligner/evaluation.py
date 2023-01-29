@@ -1,32 +1,3 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Codespaces
-Marketplace
-Explore
- 
-@Ragnarvd 
-bfsujason
-/
-bertalign
-Public
-Fork your own copy of bfsujason/bertalign
-Code
-Issues
-Pull requests
-Actions
-Projects
-Security
-Insights
-bertalign/bertalign/eval.py /
-@bfsujason
-bfsujason Multilingual Sentence Alignment
-Latest commit 2abc392 on Apr 16, 2022
- History
- 1 contributor
-128 lines (110 sloc)  4.84 KB
-
 import sys
 import numpy as np
 
