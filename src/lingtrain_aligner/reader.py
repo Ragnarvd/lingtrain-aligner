@@ -760,7 +760,7 @@ def create_book(
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <title>Lingtrain Magic Book</title>
+    <title>Create your own parallel corpus</title>
     <meta charset="UTF-8">
     {css}
 </head>
@@ -875,12 +875,12 @@ def create_polybook(
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
-    <title>Lingtrain Magic Book</title>
+    <title>Create your own parallel corpus</title>
     <meta charset="UTF-8">
     {css}
 </head>
 <body>
-<div class="lt-header">🚀 created in lingtrain alignment studio</div>"""
+<div class="lt-header">create your own parallel corpus</div>"""
         )
 
         # --------------------BOOK
