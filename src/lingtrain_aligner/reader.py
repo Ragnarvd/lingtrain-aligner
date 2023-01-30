@@ -765,7 +765,7 @@ def create_book(
     {css}
 </head>
 <body>
-<div class="lt-header">🚀 lingtrain parallel book 🡒 {header_text} 🡒 {min_par_len} paragpaphs</div>"""
+<div class="lt-header"> create your own parallel corpus 🡒 {header_text} 🡒 {min_par_len} paragpaphs</div>"""
         )
 
         # --------------------BOOK
@@ -1182,7 +1182,7 @@ DIVIDER_URL = "https://habrastorage.org/webt/28/2n/1b/282n1b8oxclxp-jacqfc3sytbq
 
 
 HTML_FOOTER = """
-<div class="lt-footer">🚀 created in lingtrain alignment studio</div>"""
+<div class="lt-footer"> create your own parallel corpus</div>"""
 
 CSS_TEMPLATE = """<style type="text/css">
 %GENERAL%
