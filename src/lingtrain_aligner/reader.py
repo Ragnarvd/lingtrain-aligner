@@ -647,7 +647,7 @@ def create_book_1(paragraphs_from, paragraphs_to, meta, output_path, template, s
             <link rel="preconnect" href="https://fonts.gstatic.com">
             <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400&display=swap" rel="stylesheet">
             <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
-            <title>Lingtrain Magic Book</title>
+            <title>Your own parallel corpusk</title>
             {css}
         </head>
         <body>""")
